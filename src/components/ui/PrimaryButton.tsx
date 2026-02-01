@@ -1,0 +1,70 @@
+'use client';
+
+import { ReactNode } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+type ButtonSize = 'md' | 'lg';
+
+interface PrimaryButtonProps {
+  children: ReactNode;
+  href?: string;
+  onClick?: () => void;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  type?: 'button' | 'submit';
+}
+
+const sizeClasses: Record<ButtonSize, string> = {
+  md: 'w-[200px] h-[56px] text-[16px]',
+  lg: 'w-[280px] h-[64px] text-[17px]',
+};
+
+export default function PrimaryButton({
+  children,
+  href,
+  onClick,
+  size = 'md',
+  fullWidth = false,
+  disabled = false,
+  type = 'button',
+}: PrimaryButtonProps) {
+  const baseClasses = `
+    inline-flex items-center justify-center
+    rounded-[4px] font-semibold
+    transition-colors duration-200
+    ${sizeClasses[size]}
+    ${fullWidth ? 'w-full' : ''}
+    ${disabled ? 'bg-[#d0d0d0] cursor-not-allowed' : 'bg-accent text-white hover:bg-primary'}
+  `;
+
+  const motionProps = disabled
+    ? {}
+    : {
+        whileHover: { scale: 1 },
+        whileTap: { scale: 0.98 },
+      };
+
+  if (href && !disabled) {
+    return (
+      <motion.div {...motionProps} className={fullWidth ? 'w-full' : 'inline-block'}>
+        <Link href={href} className={baseClasses}>
+          {children}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.button
+      {...motionProps}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={baseClasses}
+    >
+      {children}
+    </motion.button>
+  );
+}
