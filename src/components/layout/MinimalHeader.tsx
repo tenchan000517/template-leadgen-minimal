@@ -93,7 +93,8 @@ export default function MinimalHeader({ currentPath }: MinimalHeaderProps) {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden w-[44px] h-[44px] flex flex-col items-center justify-center gap-[6px]"
-            aria-label="メニュー"
+            aria-label={isMobileMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+            aria-expanded={isMobileMenuOpen}
           >
             <span
               className={`

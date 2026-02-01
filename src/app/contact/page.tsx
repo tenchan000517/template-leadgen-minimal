@@ -86,11 +86,37 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const result = await response.json();
+
+      if (!response.ok) {
+        // サーバーサイドバリデーションエラーを処理
+        if (result.errors) {
+          const serverErrors: FormErrors = {};
+          result.errors.forEach((err: { field: string; message: string }) => {
+            serverErrors[err.field as keyof FormErrors] = err.message;
+          });
+          setErrors(serverErrors);
+        } else {
+          setErrors({ message: result.message || '送信に失敗しました' });
+        }
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setErrors({ message: '通信エラーが発生しました。しばらく経ってから再度お試しください。' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFieldChange = (field: keyof FormData) => (value: string) => {
