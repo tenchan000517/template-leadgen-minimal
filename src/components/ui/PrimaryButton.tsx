@@ -2,7 +2,6 @@
 
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 type ButtonSize = 'md' | 'lg';
 
@@ -33,38 +32,30 @@ export default function PrimaryButton({
   const baseClasses = `
     inline-flex items-center justify-center
     rounded-[4px] font-semibold
-    transition-colors duration-200
+    transition-all duration-200
     ${sizeClasses[size]}
     ${fullWidth ? 'w-full' : ''}
-    ${disabled ? 'bg-[#d0d0d0] cursor-not-allowed' : 'bg-accent text-white hover:bg-primary'}
+    ${disabled ? 'bg-[#d0d0d0] cursor-not-allowed' : 'bg-accent text-white hover:bg-primary active:scale-[0.98]'}
   `;
-
-  const motionProps = disabled
-    ? {}
-    : {
-        whileHover: { scale: 1 },
-        whileTap: { scale: 0.98 },
-      };
 
   if (href && !disabled) {
     return (
-      <motion.div {...motionProps} className={fullWidth ? 'w-full' : 'inline-block'}>
+      <div className={fullWidth ? 'w-full' : 'inline-block'}>
         <Link href={href} className={baseClasses}>
           {children}
         </Link>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.button
-      {...motionProps}
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       className={baseClasses}
     >
       {children}
-    </motion.button>
+    </button>
   );
 }

@@ -1,3 +1,7 @@
+'use client';
+
+import { FadeInUp } from '@/components/animations';
+
 type HeightSize = 'sm' | 'md' | 'lg';
 
 interface PageHeaderProps {
@@ -30,16 +34,22 @@ export default function PageHeader({
         bg-background
       `}
     >
-      <h1 className="text-center text-[36px] lg:text-[48px]">{title}</h1>
+      <FadeInUp>
+        <h1 className="text-center text-[36px] lg:text-[48px]">{title}</h1>
+      </FadeInUp>
       {description && (
-        <p className="text-center text-text-light mt-4 lg:mt-6 text-[16px] lg:text-[18px]">
-          {description}
-        </p>
+        <FadeInUp delay={100}>
+          <p className="text-center text-text-light mt-4 lg:mt-6 text-[16px] lg:text-[18px]">
+            {description}
+          </p>
+        </FadeInUp>
       )}
       {lastUpdated && (
-        <p className="text-center text-text-light mt-4 text-[14px]">
-          最終更新日: {lastUpdated}
-        </p>
+        <FadeInUp delay={200}>
+          <p className="text-center text-text-light mt-4 text-[14px]">
+            最終更新日: {lastUpdated}
+          </p>
+        </FadeInUp>
       )}
     </section>
   );

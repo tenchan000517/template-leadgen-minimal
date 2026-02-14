@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { FadeInUp } from '@/components/animations';
 import { getPageData } from '@/lib/site';
 import { PageHeader, PrimaryButton, TextLink } from '@/components';
 import FormField from '@/components/contact/FormField';
@@ -128,12 +128,7 @@ export default function ContactPage() {
 
   if (isSubmitted) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="min-h-[60vh] flex flex-col justify-center items-center px-[5%] lg:px-[20%] py-[120px] lg:py-[200px]"
-      >
+      <FadeInUp className="min-h-[60vh] flex flex-col justify-center items-center px-[5%] lg:px-[20%] py-[120px] lg:py-[200px]">
         <h1 className="text-[28px] lg:text-[36px] text-center">
           {data.thankYou.heading}
         </h1>
@@ -145,7 +140,7 @@ export default function ContactPage() {
             {data.thankYou.backLink.text}
           </TextLink>
         </div>
-      </motion.div>
+      </FadeInUp>
     );
   }
 

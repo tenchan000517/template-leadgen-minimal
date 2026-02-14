@@ -12,5 +12,4 @@ export { default as ScrollIndicator } from './ui/ScrollIndicator';
 export { default as PageHeader } from './sections/PageHeader';
 export { default as CTASection } from './sections/CTASection';
 
-// Animation components
-export { default as FadeInView } from './animation/FadeInView';
+// Animation components are available at '@/components/animations'

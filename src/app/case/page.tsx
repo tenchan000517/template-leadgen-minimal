@@ -4,9 +4,9 @@ import { getPageData } from '@/lib/site';
 import {
   PageHeader,
   SectionWrapper,
-  FadeInView,
   CTASection,
 } from '@/components';
+import { FadeInUp } from '@/components/animations';
 
 export default function CasePage() {
   const data = getPageData('case');
@@ -24,7 +24,7 @@ export default function CasePage() {
       <SectionWrapper background="offwhite" paddingTop="md" paddingBottom="md">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-[60px] lg:gap-0 lg:divide-x lg:divide-[#e0e0e0]">
           {data.cases.map((caseItem, index) => (
-            <FadeInView key={caseItem.id} delay={index * 0.1}>
+            <FadeInUp key={caseItem.id} delay={index * 0.1}>
               <div className="lg:px-10 first:lg:pl-0 last:lg:pr-0">
                 <span className="text-[14px] text-text-light">
                   {caseItem.industry}
@@ -44,7 +44,7 @@ export default function CasePage() {
                   {caseItem.result.label}
                 </p>
               </div>
-            </FadeInView>
+            </FadeInUp>
           ))}
         </div>
       </SectionWrapper>
@@ -59,14 +59,14 @@ export default function CasePage() {
           id={caseItem.id}
         >
           <div className="max-w-[800px] mx-auto">
-            <FadeInView>
+            <FadeInUp>
               <h2 className="text-[24px] lg:text-[28px]">{caseItem.title}</h2>
               <p className="text-text-light mt-6 leading-[1.8]">
                 {caseItem.background}
               </p>
-            </FadeInView>
+            </FadeInUp>
 
-            <FadeInView delay={0.1}>
+            <FadeInUp delay={0.1}>
               <div className="mt-[48px] lg:mt-[60px]">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold">
                   課題
@@ -75,9 +75,9 @@ export default function CasePage() {
                   {caseItem.problem}
                 </p>
               </div>
-            </FadeInView>
+            </FadeInUp>
 
-            <FadeInView delay={0.2}>
+            <FadeInUp delay={0.2}>
               <div className="mt-[48px] lg:mt-[60px]">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold">
                   解決策
@@ -86,9 +86,9 @@ export default function CasePage() {
                   {caseItem.solution}
                 </p>
               </div>
-            </FadeInView>
+            </FadeInUp>
 
-            <FadeInView delay={0.3}>
+            <FadeInUp delay={0.3}>
               <div className="mt-[48px] lg:mt-[60px]">
                 <h3 className="text-[18px] lg:text-[20px] font-semibold">
                   成果
@@ -108,7 +108,7 @@ export default function CasePage() {
                   {caseItem.result.description}
                 </p>
               </div>
-            </FadeInView>
+            </FadeInUp>
           </div>
         </SectionWrapper>
       ))}

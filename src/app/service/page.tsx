@@ -4,9 +4,9 @@ import { getPageData } from '@/lib/site';
 import {
   PageHeader,
   SectionWrapper,
-  FadeInView,
   CTASection,
 } from '@/components';
+import { FadeInUp } from '@/components/animations';
 
 export default function ServicePage() {
   const data = getPageData('service');
@@ -22,14 +22,14 @@ export default function ServicePage() {
 
       {/* Service Overview */}
       <SectionWrapper background="offwhite" paddingTop="lg" paddingBottom="lg">
-        <FadeInView>
+        <FadeInUp>
           <h2 className="text-[28px] lg:text-[36px] mb-[60px] lg:mb-[80px]">
             {data.overview.heading}
           </h2>
-        </FadeInView>
+        </FadeInUp>
         <div className="space-y-[80px] lg:space-y-[120px]">
           {data.overview.categories.map((category, index) => (
-            <FadeInView key={category.number} delay={index * 0.15}>
+            <FadeInUp key={category.number} delay={index * 0.15}>
               <div className="flex flex-col lg:flex-row lg:gap-[10%]">
                 <div className="lg:w-[40%] mb-6 lg:mb-0">
                   <span className="text-[28px] lg:text-[32px] font-bold text-accent">
@@ -56,21 +56,21 @@ export default function ServicePage() {
                   </ul>
                 </div>
               </div>
-            </FadeInView>
+            </FadeInUp>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Why Choose Us */}
       <SectionWrapper background="white" paddingTop="xl" paddingBottom="lg">
-        <FadeInView>
+        <FadeInUp>
           <h2 className="text-center text-[28px] lg:text-[36px] mb-[60px] lg:mb-[80px]">
             {data.whyChooseUs.heading}
           </h2>
-        </FadeInView>
+        </FadeInUp>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-[48px] lg:gap-[60px]">
           {data.whyChooseUs.reasons.map((reason, index) => (
-            <FadeInView key={index} delay={index * 0.1}>
+            <FadeInUp key={index} delay={index * 0.1}>
               <div>
                 <h3 className="text-[24px] lg:text-[28px] font-bold">
                   {reason.keyword}
@@ -79,25 +79,25 @@ export default function ServicePage() {
                   {reason.description}
                 </p>
               </div>
-            </FadeInView>
+            </FadeInUp>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Process */}
       <SectionWrapper background="offwhite" paddingTop="lg" paddingBottom="lg">
-        <FadeInView>
+        <FadeInUp>
           <h2 className="text-[28px] lg:text-[36px] mb-[60px] lg:mb-[80px]">
             {data.process.heading}
           </h2>
-        </FadeInView>
+        </FadeInUp>
         <div className="relative">
           {/* Timeline line */}
           <div className="hidden lg:block absolute left-[12.5%] top-[24px] bottom-[24px] w-[1px] bg-[#e0e0e0]" />
 
           <div className="space-y-[60px] lg:space-y-[80px]">
             {data.process.steps.map((step, index) => (
-              <FadeInView key={step.number} delay={index * 0.1} direction="left">
+              <FadeInUp key={step.number} delay={index * 0.1}>
                 <div className="flex gap-[5%] lg:gap-[10%]">
                   <div className="w-[20%] lg:w-[25%] flex-shrink-0 relative">
                     <span className="text-[36px] lg:text-[48px] font-bold text-[#c0c0c0]">
@@ -111,7 +111,7 @@ export default function ServicePage() {
                     </p>
                   </div>
                 </div>
-              </FadeInView>
+              </FadeInUp>
             ))}
           </div>
         </div>

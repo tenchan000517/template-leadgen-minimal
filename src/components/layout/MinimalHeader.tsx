@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 import { getSiteData } from '@/lib/site';
 
 interface MinimalHeaderProps {
@@ -119,46 +118,42 @@ export default function MinimalHeader({ currentPath }: MinimalHeaderProps) {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[999] bg-white lg:hidden"
+      <div
+        className={`
+          fixed inset-0 z-[999] bg-white lg:hidden
+          transition-opacity duration-200
+          ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+        `}
+      >
+        <div className="pt-[80px] px-[5%] flex flex-col items-center gap-8">
+          {navigation.main.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`
+                text-primary text-[20px] font-medium
+                ${activePath === item.href ? 'underline underline-offset-4' : ''}
+              `}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href={navigation.cta.href}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="
+              inline-flex items-center justify-center
+              w-[200px] h-[56px]
+              bg-accent text-white
+              rounded-[4px] font-semibold text-[17px]
+              mt-4
+            "
           >
-            <div className="pt-[80px] px-[5%] flex flex-col items-center gap-8">
-              {navigation.main.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`
-                    text-primary text-[20px] font-medium
-                    ${activePath === item.href ? 'underline underline-offset-4' : ''}
-                  `}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Link
-                href={navigation.cta.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="
-                  inline-flex items-center justify-center
-                  w-[200px] h-[56px]
-                  bg-accent text-white
-                  rounded-[4px] font-semibold text-[17px]
-                  mt-4
-                "
-              >
-                {navigation.cta.label}
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {navigation.cta.label}
+          </Link>
+        </div>
+      </div>
 
       {/* Spacer for fixed header */}
       <div className="h-[60px] lg:h-[80px]" />

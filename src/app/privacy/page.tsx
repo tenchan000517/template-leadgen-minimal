@@ -2,6 +2,7 @@
 
 import { getPageData, company } from '@/lib/site';
 import { PageHeader, SectionWrapper } from '@/components';
+import { FadeInUp } from '@/components/animations';
 
 export default function PrivacyPage() {
   const data = getPageData('privacy');
@@ -70,22 +71,24 @@ export default function PrivacyPage() {
 
       {/* Policy Content */}
       <SectionWrapper background="offwhite" paddingTop="sm" paddingBottom="lg">
-        <div className="max-w-[800px] mx-auto">
-          {renderContent(data.content)}
+        <FadeInUp>
+          <div className="max-w-[800px] mx-auto">
+            {renderContent(data.content)}
 
-          {/* Contact Info */}
-          <div className="mt-8 p-6 bg-white">
-            <p className="text-[15px] lg:text-[16px] leading-[1.9]">
-              会社名: {company.name}
-            </p>
-            <p className="text-[15px] lg:text-[16px] leading-[1.9]">
-              メールアドレス: {company.email}
-            </p>
-            <p className="text-[15px] lg:text-[16px] leading-[1.9]">
-              電話番号: {company.phone}
-            </p>
+            {/* Contact Info */}
+            <div className="mt-8 p-6 bg-white">
+              <p className="text-[15px] lg:text-[16px] leading-[1.9]">
+                会社名: {company.name}
+              </p>
+              <p className="text-[15px] lg:text-[16px] leading-[1.9]">
+                メールアドレス: {company.email}
+              </p>
+              <p className="text-[15px] lg:text-[16px] leading-[1.9]">
+                電話番号: {company.phone}
+              </p>
+            </div>
           </div>
-        </div>
+        </FadeInUp>
       </SectionWrapper>
     </>
   );

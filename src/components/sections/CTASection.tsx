@@ -1,6 +1,7 @@
 'use client';
 
-import { FadeInView, PrimaryButton, TextLink } from '@/components';
+import { PrimaryButton, TextLink } from '@/components';
+import { FadeInUp } from '@/components/animations';
 
 type BackgroundColor = 'dark' | 'offwhite';
 
@@ -34,7 +35,7 @@ export default function CTASection({
         ${isDark ? 'bg-primary' : 'bg-background-alt'}
       `}
     >
-      <FadeInView>
+      <FadeInUp>
         <div className="text-center">
           <h2
             className={`
@@ -70,7 +71,7 @@ export default function CTASection({
             </div>
           )}
         </div>
-      </FadeInView>
+      </FadeInUp>
     </section>
   );
 }
